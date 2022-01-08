@@ -2,7 +2,7 @@ let accuracy = 5
 let gravity = 400
 let clothY = 28
 let clothX = 54
-let spacing = 10
+let spacing = 15
 let tearDist = 60
 let friction = 0.99
 let bounce = 0.5
@@ -10,10 +10,21 @@ let bounce = 0.5
 let canvas = document.getElementById('canvas')
 let ctx = canvas.getContext('2d')
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
 
-ctx.strokeStyle = '#555'
+
+/**
+ * @param {HTMLCanvasElement} canvas 
+ */
+function resize(canvas) {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+}
+
+resize(canvas);
+
+window.addEventListener('resize', resize.apply(null, [canvas]));
+
+ctx.strokeStyle = '#ccc'
 
 let mouse = {
     cut: 8,
