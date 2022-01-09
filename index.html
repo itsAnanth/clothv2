@@ -24,11 +24,27 @@
         canvas {
             background: linear-gradient(-45deg, rgb(32, 31, 31), rgb(31, 29, 29));
         }
+
+        #controls {
+            position: fixed;
+            bottom: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content:space-between;
+        }
     </style>
 </head>
 
 <body>
+    <div id="controls">
+        <button id="reset">Reset</button>
+        <button id="gravity">Zero Gravity</button>
+    </div>
+
     <canvas id="canvas"></canvas>
+
 </body>
 
 </html>

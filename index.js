@@ -2,6 +2,8 @@
  * Original logic is from @dissimulate, all credits goes to them 
  */
 
+/** @type {HTMLInputElement} */
+const gravityInput = document.getElementById('gravity');
 /** @type {HTMLCanvasElement} */
 const canvas = document.getElementById('canvas');
 /** @type {CanvasRenderingContext2D} */
@@ -30,7 +32,7 @@ let MOUSE = {
 ctx.strokeStyle = '#ccc'
 
 /** @type {Cloth} */
-const cloth = new Cloth();
+let cloth = new Cloth();
 update();
 
 
@@ -63,4 +65,16 @@ canvas.onmousemove = setMouse
 
 window.onmouseup = () => (MOUSE.down = false)
 
-canvas.oncontextmenu = (e) => e.preventDefault()
+canvas.oncontextmenu = (e) => e.preventDefault();
+
+gravityInput.addEventListener('click', () => {
+    if (VAR_GRAVITY == 400) {
+        gravityInput.innerHTML = 'Gravity';
+        VAR_GRAVITY = 1;
+    } else {
+        gravityInput.innerHTML = 'Zero Gravity';
+        VAR_GRAVITY = 400;
+    }
+});
+
+document.getElementById('reset').addEventListener('click', () => cloth = new Cloth())
