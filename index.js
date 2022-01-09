@@ -12,6 +12,9 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+VAR_CLOTH_HEIGHT = ~~(canvas.height / 2 / VAR_SPACING);
+VAR_CLOTH_WIDTH = ~~(canvas.width / 2 / VAR_SPACING);
+
 
 /**
  * Public mouse object to store button states, previous and current corrdinates.
