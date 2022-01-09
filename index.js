@@ -71,9 +71,11 @@ gravityInput.addEventListener('click', () => {
     if (VAR_GRAVITY == 400) {
         gravityInput.innerHTML = 'Gravity';
         VAR_GRAVITY = 1;
+        VAR_FRICTION = 1;
     } else {
         gravityInput.innerHTML = 'Zero Gravity';
         VAR_GRAVITY = 400;
+        VAR_FRICTION = 0.99;
     }
 });
 
