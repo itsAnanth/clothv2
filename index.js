@@ -78,3 +78,49 @@ gravityInput.addEventListener('click', () => {
 });
 
 document.getElementById('reset').addEventListener('click', () => cloth = new Cloth())
+
+// Add touch events
+
+function setTouch(e) {
+    let rect = canvas.getBoundingClientRect()
+    MOUSE.px = MOUSE.x
+    MOUSE.py = MOUSE.y
+    MOUSE.x = e.touches[0].clientX - rect.left
+    MOUSE.y = e.touches[0].clientY - rect.top
+}
+
+canvas.addEventListener('touchstart', function (e) {
+    MOUSE.down = true
+    let rect = canvas.getBoundingClientRect()
+    MOUSE.x = e.touches[0].clientX - rect.left
+    MOUSE.y = e.touches[0].clientY - rect.top
+    setTouch(e)
+}, false);
+
+canvas.addEventListener('touchmove', function (e) {
+    setTouch(e)
+}, false);
+
+window.addEventListener('touchend', function (e) {
+    MOUSE.down = false
+}, false);
+
+// Prevent scrolling when touching the canvas
+
+document.body.addEventListener('touchstart', function (e) {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, false);
+
+document.body.addEventListener('touchend', function (e) {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, false);
+
+document.body.addEventListener('touchmove', function (e) {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, false);
