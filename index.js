@@ -31,13 +31,40 @@ let MOUSE = {
     py: 0
 }
 
+class AnimationFrame {
+    constructor(fps = 60, callback = () => {}) {
+        this.requestId = 0;
+        this.fps = fps;
+        this.callback = callback;
+    }
+
+    start() {
+        let then = performance.now();
+        const interval = 1000 / this.fps;
+        const tolerance = 0.1;
+
+        const animateLoop = (now) => {
+            this.requestId = requestAnimationFrame(animateLoop);
+            const delta = now - then;
+
+            if (delta >= interval - tolerance) {
+                then = now - (delta % interval);
+                this.callback(delta);
+            }
+        };
+        this.requestId = requestAnimationFrame(animateLoop);
+    }
+
+    stop() {
+        cancelAnimationFrame(this.requestId);
+    }
+}
+
 /** cloth thread color */
 ctx.strokeStyle = '#ccc'
 
 /** @type {Cloth} */
 let cloth = new Cloth();
-update();
-
 
 /**
  * Main animation loop
@@ -45,9 +72,10 @@ update();
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     cloth.update(0.016)
-
-    requestAnimationFrame(update)
 }
+
+const animation = new AnimationFrame(60, update);
+animation.start();
 
 
 function setMouse(e) {
